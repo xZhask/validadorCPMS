@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <form action="" method="post" name="frmExcelImport" id="frmExcelImport" enctype="multipart/form-data">
+                <div>
+                    <label>Seleccionar Archivo Excel</label>
+                    <input type="file" name="mi-archivo" id="mi-archivo" accept=".xls,.xlsx">
+                    <button type="submit" id="submit" name="import" class="btn-submit">Import</button>
+                </div>
+            </form>
+        </div>
+        <div class="container" id="cont-table">
+
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>
