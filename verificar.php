@@ -21,16 +21,8 @@ $tarifario = [
 ];
 
 $ultimaFila = $hojaActual->getHighestRow();
-$tabla = '<table>';
-$tabla .= '<thead>';
-$tabla .= '<tr>';
-$tabla .= "<th>Código CPMS</th>";
-$tabla .= "<th>Descripción</th>";
-//$tabla.= "<th>Id Atención</th>";
-$tabla .= "<th>Responsable</th>";
-$tabla .= '</tr>';
-$tabla .= '</thead>';
-$tabla .= '<tbody>';
+$tabla = '';
+$cont = 0;
 for ($i = 10; $i <= $ultimaFila; $i++) {
     $coordenadas = "B" . $i;
     $celda = $hojaActual->getCell($coordenadas)->getValue();
@@ -43,17 +35,18 @@ for ($i = 10; $i <= $ultimaFila; $i++) {
                 //$dniResponsable = $hojaActual->getCell("D" . $i)->getValue();
                 $responsable = $hojaActual->getCell("E" . $i)->getValue();
                 $tabla .= '<tr>';
-                $tabla .= "<td>$celda</td>";
-                $tabla .= "<td>$cpms</td>";
-                $tabla .= "<td>$idAtencion</td>";
-                //$tabla.= "<td>$dniResponsable</td>";
-                $tabla .= "<td>$responsable</td>";
+                $tabla .= '<td>' . $celda . '</td>';
+                $tabla .= '<td>' . $cpms . '</td>';
+                $tabla .= '<td>' . $idAtencion . '</td>';
+                //$tabla.= '<td>'.$dniResponsable.'</td>';
+                $tabla .= '<td>' . $responsable . '</td>';
                 $tabla .= '</tr>';
+                $cont = 1;
             }
     }
 }
-$tabla .= '</tbody>';
-
-echo json_encode($tabla);
+if ($cont === 0) $tabla = '<tr><td colspan="4">NO SE ENCONTRARON OBSERVACIONES</td></tr>';
+$respuesta = ['result' => $cont, 'data' => $tabla];
+echo json_encode($respuesta);
 //echo $archivo;
 unlink($ruta);

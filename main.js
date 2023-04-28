@@ -2,7 +2,7 @@ async function postData(data) {
     const response = await fetch(`verificar.php`, {
         method: "POST",
         body: data,
-    }).then((res) => res.text());
+    }).then((res) => res.json());
     return await response;
 }
 
@@ -24,12 +24,13 @@ console.log(respuesta)
 });
  */
 const form = document.querySelector('#frmExcelImport');
-const contTable = document.querySelector('#cont-table');
+const contTable = document.querySelector('#cont-result');
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
     let frm = document.querySelector("#frmExcelImport");
     let datos = new FormData(frm);
     let respuesta = await postData(datos);
-    contTable.innerHTML = respuesta;
+    console.log(respuesta)
+    contTable.innerHTML = respuesta.data;
 })
